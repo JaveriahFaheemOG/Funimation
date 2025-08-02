@@ -9,39 +9,49 @@
     * {
       box-sizing: border-box;
     }
+
     body {
       margin: 0;
       font-family: 'Raleway', sans-serif;
-      background: linear-gradient(to bottom right, #f9f4f1, #f3e9e6);
       overflow-x: hidden;
-      color: #333;
+      color: #fff;
+      background: radial-gradient(ellipse at bottom, #0b1d3a 0%, #000000 100%);
     }
 
-    /* ✨ SPARKLE BACKGROUND */
-    .sparkles {
+    /* 🌠 STAR BACKGROUND */
+    .star {
       position: absolute;
-      width: 100%;
-      height: 100%;
-      overflow: hidden;
-      z-index: 0;
+      background: white;
+      border-radius: 50%;
+      opacity: 0.7;
+      animation: twinkle 3s infinite ease-in-out;
     }
 
-    .sparkles span {
+    @keyframes twinkle {
+      0%, 100% { opacity: 0.2; transform: scale(1); }
+      50% { opacity: 1; transform: scale(1.3); }
+    }
+
+    /* 🌙 Animated Moon */
+    .moon {
       position: absolute;
-      display: block;
-      width: 6px;
-      height: 6px;
-      background: #fdd9d9;
-      animation: float 6s linear infinite;
-      opacity: 0.6;
+      top: 40px;
+      right: 60px;
+      width: 80px;
+      height: 80px;
+      background: radial-gradient(circle, #fffdf0, #d6d1ba);
+      border-radius: 50%;
+      box-shadow: 0 0 25px 8px rgba(255, 255, 200, 0.3);
+      animation: floatMoon 4s ease-in-out infinite alternate;
+      z-index: 2;
     }
 
-    @keyframes float {
-      0% { transform: translateY(0) scale(1); opacity: 0.8; }
-      100% { transform: translateY(-100vh) scale(0.5); opacity: 0; }
+    @keyframes floatMoon {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(-10px); }
     }
 
-    /* ✨ Envelope and Card Containers */
+    /* Envelope and Invite Sections */
     .envelope-container, .invite-card {
       display: flex;
       flex-direction: column;
@@ -52,7 +62,7 @@
       padding: 20px;
       position: relative;
       z-index: 1;
-      transition: opacity 1s ease, transform 1s ease;
+      overflow: hidden;
     }
 
     .envelope-button {
@@ -64,21 +74,10 @@
       border-radius: 12px;
       cursor: pointer;
       transition: all 0.3s ease;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
       position: relative;
       animation: bounce 2s infinite;
-    }
-
-    .envelope-button::before {
-      content: '';
-      position: absolute;
-      width: 20px;
-      height: 20px;
-      top: -10px;
-      left: 50%;
-      transform: translateX(-50%) rotate(45deg);
-      background-color: #d4a373;
-      z-index: -1;
+      z-index: 10;
     }
 
     .envelope-button:hover {
@@ -88,68 +87,66 @@
 
     @keyframes bounce {
       0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-8px); }
+      50% { transform: translateY(-6px); }
+    }
+
+    .envelope-heading {
+      font-family: 'Playfair Display', serif;
+      font-size: 24px;
+      margin-bottom: 30px;
+      z-index: 10;
     }
 
     .invite-card {
-      opacity: 0;
-      transform: scale(0.95);
       display: none;
-      animation: fadeInCard 1.5s forwards;
+      animation: fadeInCard 1s forwards;
     }
 
     @keyframes fadeInCard {
+      from {
+        opacity: 0;
+        transform: scale(0.95);
+      }
       to {
         opacity: 1;
         transform: scale(1);
-        display: flex;
       }
     }
 
     .card-inner {
       max-width: 600px;
-      background: linear-gradient(180deg, #fff6f0, #fbeeee);
+      background: rgba(255, 255, 255, 0.05);
       padding: 40px 30px;
       border-radius: 20px;
-      box-shadow: 0 10px 40px rgba(0,0,0,0.1);
-      animation: fadeSlideUp 1.2s ease;
-    }
-
-    @keyframes fadeSlideUp {
-      0% {
-        opacity: 0;
-        transform: translateY(50px);
-      }
-      100% {
-        opacity: 1;
-        transform: translateY(0);
-      }
+      box-shadow: 0 10px 40px rgba(255,255,255,0.08);
+      backdrop-filter: blur(6px);
+      border: 1px solid rgba(255,255,255,0.1);
     }
 
     .bismillah {
       font-size: 24px;
       font-weight: bold;
-      color: #a16666;
+      color: #ffe6c9;
       margin-bottom: 30px;
       font-family: 'Playfair Display', serif;
     }
 
     h1, h2 {
       font-family: 'Playfair Display', serif;
-      color: #9c3b3b;
+      color: #ffd4d4;
       margin: 10px 0;
     }
 
     .details {
       font-size: 17px;
-      color: #444;
+      color: #e0dcdc;
       margin-top: 20px;
       line-height: 1.6;
     }
 
     .footer {
       font-size: 13px;
-      color: #999;
+      color: #ccc;
       margin-top: 40px;
     }
 
@@ -157,7 +154,6 @@
       .card-inner {
         padding: 25px 20px;
         border-radius: 16px;
-        box-shadow: 0 6px 20px rgba(0,0,0,0.08);
       }
 
       .envelope-button {
@@ -185,31 +181,30 @@
 </head>
 <body>
 
-  <!-- ✨ SPARKLE BACKGROUND -->
-  <div class="sparkles" aria-hidden="true">
-    <span style="left: 10%; animation-delay: 0s;"></span>
-    <span style="left: 30%; animation-delay: 1s;"></span>
-    <span style="left: 50%; animation-delay: 2s;"></span>
-    <span style="left: 70%; animation-delay: 3s;"></span>
-    <span style="left: 90%; animation-delay: 4s;"></span>
-  </div>
+  <!-- 🌠 STARS (Generated via JS) -->
+  <div id="stars"></div>
 
-  <!-- ENVELOPE VIEW -->
+  <!-- 🌙 Moon -->
+  <div class="moon"></div>
+
+  <!-- 💌 ENVELOPE VIEW -->
   <div class="envelope-container" id="envelopeView">
-    <h2 style="color:#b76e79; font-family:'Playfair Display', serif;">You’ve got an invitation...</h2>
+    <h2 class="envelope-heading">
+      Under the stars and by His mercy,<br>
+      you're invited to witness a blessed beginning.
+    </h2>
     <button class="envelope-button" onclick="openCard()">Open Invitation</button>
   </div>
 
-  <!-- INVITE VIEW -->
+  <!-- 🌸 INVITE VIEW -->
   <div class="invite-card" id="cardView">
     <div class="card-inner">
       <div class="bismillah">بِسْمِ ٱللَّٰهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ</div>
-      <h2>You are warmly invited to the</h2>
-      <h1>Nikkah Ceremony</h1>
+      <h2>You are warmly invited to celebrate with us</h2>
+      <h1>The Nikkah Ceremony</h1>
       <div class="details">
-        of <strong>Daughter of Faheem Ahmed Qureshi</strong><br/>
-        with<br/>
-        <strong>Zain Hassan</strong>
+      of the beloved daughter of <strong>Faheem Ahmed Qureshi</strong><br/>
+      and <strong>Zain Hassan</strong>
       </div>
       <div class="details">
         🗓️ <strong>Date:</strong> 30th August 2025<br/>
@@ -225,25 +220,33 @@
     </div>
   </div>
 
-  <!-- Confetti JS -->
-  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+  <!-- ⭐ Star Generator -->
   <script>
+    const starContainer = document.getElementById('stars');
+    for (let i = 0; i < 100; i++) {
+      const star = document.createElement('div');
+      star.className = 'star';
+      const size = Math.random() * 2 + 1;
+      const left = Math.random() * 100;
+      const top = Math.random() * 100;
+      const duration = Math.random() * 5 + 3;
+
+      Object.assign(star.style, {
+        width: `${size}px`,
+        height: `${size}px`,
+        left: `${left}%`,
+        top: `${top}%`,
+        animationDuration: `${duration}s`,
+      });
+
+      starContainer.appendChild(star);
+    }
+
     function openCard() {
       document.getElementById('envelopeView').style.display = 'none';
-      const card = document.getElementById('cardView');
-      card.style.display = 'flex';
-      setTimeout(() => {
-        card.style.opacity = 1;
-        card.style.transform = 'scale(1)';
-      }, 100);
-
-      // 🎉 Confetti burst
-      confetti({
-        particleCount: 100,
-        spread: 80,
-        origin: { y: 0.6 }
-      });
+      document.getElementById('cardView').style.display = 'flex';
     }
   </script>
+
 </body>
 </html>
