@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Nikkah Invitation</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Raleway&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      font-family: 'Raleway', sans-serif;
+      background: linear-gradient(to bottom right, #f9f4f1, #f3e9e6);
+      overflow-x: hidden;
+      color: #333;
+    }
+
+    /* ✨ SPARKLE BACKGROUND */
+    .sparkles {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      z-index: 0;
+    }
+
+    .sparkles span {
+      position: absolute;
+      display: block;
+      width: 6px;
+      height: 6px;
+      background: #fdd9d9;
+      animation: float 6s linear infinite;
+      opacity: 0.6;
+    }
+
+    @keyframes float {
+      0% { transform: translateY(0) scale(1); opacity: 0.8; }
+      100% { transform: translateY(-100vh) scale(0.5); opacity: 0; }
+    }
+
+    /* ✨ Envelope and Card Containers */
+    .envelope-container, .invite-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      text-align: center;
+      padding: 20px;
+      position: relative;
+      z-index: 1;
+      transition: opacity 1s ease, transform 1s ease;
+    }
+
+    .envelope-button {
+      background: #fef1e6;
+      border: 2px solid #d4a373;
+      color: #8b5e3c;
+      padding: 20px 30px;
+      font-size: 18px;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+      position: relative;
+      animation: bounce 2s infinite;
+    }
+
+    .envelope-button::before {
+      content: '';
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      top: -10px;
+      left: 50%;
+      transform: translateX(-50%) rotate(45deg);
+      background-color: #d4a373;
+      z-index: -1;
+    }
+
+    .envelope-button:hover {
+      background-color: #ffe5d9;
+      transform: scale(1.05);
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+
+    .invite-card {
+      opacity: 0;
+      transform: scale(0.95);
+      display: none;
+      animation: fadeInCard 1.5s forwards;
+    }
+
+    @keyframes fadeInCard {
+      to {
+        opacity: 1;
+        transform: scale(1);
+        display: flex;
+      }
+    }
+
+    .card-inner {
+      max-width: 600px;
+      background: linear-gradient(180deg, #fff6f0, #fbeeee);
+      padding: 40px 30px;
+      border-radius: 20px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+      animation: fadeSlideUp 1.2s ease;
+    }
+
+    @keyframes fadeSlideUp {
+      0% {
+        opacity: 0;
+        transform: translateY(50px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .bismillah {
+      font-size: 24px;
+      font-weight: bold;
+      color: #a16666;
+      margin-bottom: 30px;
+      font-family: 'Playfair Display', serif;
+    }
+
+    h1, h2 {
+      font-family: 'Playfair Display', serif;
+      color: #9c3b3b;
+      margin: 10px 0;
+    }
+
+    .details {
+      font-size: 17px;
+      color: #444;
+      margin-top: 20px;
+      line-height: 1.6;
+    }
+
+    .footer {
+      font-size: 13px;
+      color: #999;
+      margin-top: 40px;
+    }
+
+    @media(max-width: 600px) {
+      .card-inner {
+        padding: 25px 20px;
+        border-radius: 16px;
+        box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+      }
+
+      .envelope-button {
+        padding: 16px 20px;
+        font-size: 16px;
+      }
+
+      .bismillah {
+        font-size: 20px;
+      }
+
+      h1 {
+        font-size: 24px;
+      }
+
+      h2 {
+        font-size: 18px;
+      }
+
+      .details {
+        font-size: 15px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ✨ SPARKLE BACKGROUND -->
+  <div class="sparkles" aria-hidden="true">
+    <span style="left: 10%; animation-delay: 0s;"></span>
+    <span style="left: 30%; animation-delay: 1s;"></span>
+    <span style="left: 50%; animation-delay: 2s;"></span>
+    <span style="left: 70%; animation-delay: 3s;"></span>
+    <span style="left: 90%; animation-delay: 4s;"></span>
+  </div>
+
+  <!-- ENVELOPE VIEW -->
+  <div class="envelope-container" id="envelopeView">
+    <h2 style="color:#b76e79; font-family:'Playfair Display', serif;">You’ve got an invitation...</h2>
+    <button class="envelope-button" onclick="openCard()">Open Invitation</button>
+  </div>
+
+  <!-- INVITE VIEW -->
+  <div class="invite-card" id="cardView">
+    <div class="card-inner">
+      <div class="bismillah">بِسْمِ ٱللَّٰهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ</div>
+      <h2>You are warmly invited to the</h2>
+      <h1>Nikkah Ceremony</h1>
+      <div class="details">
+        of <strong>Daughter of Faheem Ahmed Qureshi</strong><br/>
+        with<br/>
+        <strong>Zain Hassan</strong>
+      </div>
+      <div class="details">
+        🗓️ <strong>Date:</strong> 30th August 2025<br/>
+        🕓 <strong>Time:</strong> ----- PM<br/>
+        📍 <strong>Venue:</strong> ----------, Karachi
+      </div>
+      <div class="details">
+        May Allah bless this union with love, barakah, and happiness.
+      </div>
+      <div class="footer">
+        — With love, Faheem Family —
+      </div>
+    </div>
+  </div>
+
+  <!-- Confetti JS -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+  <script>
+    function openCard() {
+      document.getElementById('envelopeView').style.display = 'none';
+      const card = document.getElementById('cardView');
+      card.style.display = 'flex';
+      setTimeout(() => {
+        card.style.opacity = 1;
+        card.style.transform = 'scale(1)';
+      }, 100);
+
+      // 🎉 Confetti burst
+      confetti({
+        particleCount: 100,
+        spread: 80,
+        origin: { y: 0.6 }
+      });
+    }
+  </script>
+</body>
+</html>
